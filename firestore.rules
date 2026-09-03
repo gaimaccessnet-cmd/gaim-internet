@@ -1,0 +1,9 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Open access for GAIM Internet portal and admin dashboard (allows direct registration and dashboard management)
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "GAIM Internet",
+  "description": "Website resmi penyedia layanan internet GAIM Internet dengan fitur pendaftaran paket, cek area, admin panel pemantauan pendapatan, persetujuan pembayaran manual, notifikasi real-time, dan ekspor laporan bulanan PDF.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

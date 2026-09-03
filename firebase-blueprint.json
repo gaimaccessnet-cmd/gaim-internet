@@ -1,0 +1,86 @@
+{
+  "entities": {
+    "CustomerOrder": {
+      "title": "Customer Order / Registration",
+      "description": "Stores user registration and service orders",
+      "properties": {
+        "id": { "type": "string", "description": "Order ID" },
+        "orderNumber": { "type": "string", "description": "Unique Order / Ticket Number" },
+        "customerName": { "type": "string", "description": "Full name of customer" },
+        "customerPhone": { "type": "string", "description": "WhatsApp contact phone number" },
+        "customerAddress": { "type": "string", "description": "Physical installation address" },
+        "packageId": { "type": "string", "description": "Package identifier" },
+        "packageName": { "type": "string", "description": "Package name" },
+        "packageSpeed": { "type": "string", "description": "Package internet bandwidth" },
+        "packagePrice": { "type": "number", "description": "Monthly subscription price" },
+        "transferBank": { "type": "string", "description": "Bank choice for payment" },
+        "senderName": { "type": "string", "description": "Bank account sender name" },
+        "status": { "type": "string", "description": "Order status (pending, active, rejected)" },
+        "createdAt": { "type": "string", "description": "Timestamp ISO string of order creation" },
+        "approvedAt": { "type": "string", "description": "Timestamp ISO string of approval" },
+        "ipAddress": { "type": "string", "description": "Assigned static IP in LAN" }
+      },
+      "required": ["id", "orderNumber", "customerName", "customerPhone", "customerAddress", "packageName", "packagePrice", "status", "createdAt"]
+    },
+    "BillingInvoice": {
+      "title": "Billing Invoice",
+      "description": "Monthly billing invoice issued to customers",
+      "properties": {
+        "id": { "type": "string", "description": "Invoice ID" },
+        "invoiceNumber": { "type": "string", "description": "Invoice sequence number" },
+        "customerId": { "type": "string", "description": "Reference Customer ID" },
+        "customerName": { "type": "string", "description": "Customer name" },
+        "customerPhone": { "type": "string", "description": "Customer phone" },
+        "month": { "type": "string", "description": "Billing month (e.g. Juli 2026)" },
+        "packageName": { "type": "string", "description": "Package name" },
+        "packagePrice": { "type": "number", "description": "Amount to pay" },
+        "status": { "type": "string", "description": "Payment status (unpaid, paid)" },
+        "createdAt": { "type": "string", "description": "Timestamp ISO string" },
+        "paidAt": { "type": "string", "description": "Timestamp ISO string when paid" }
+      },
+      "required": ["id", "invoiceNumber", "customerId", "customerName", "month", "packagePrice", "status", "createdAt"]
+    },
+    "EarningRecord": {
+      "title": "Earning Record",
+      "description": "Financial audit transaction entry",
+      "properties": {
+        "id": { "type": "string", "description": "Transaction ID" },
+        "date": { "type": "string", "description": "Date format YYYY-MM-DD" },
+        "amount": { "type": "number", "description": "Recorded revenue amount in IDR" },
+        "customerName": { "type": "string", "description": "Customer name" },
+        "packageName": { "type": "string", "description": "Package name" },
+        "invoiceNumber": { "type": "string", "description": "Invoice number reference" }
+      },
+      "required": ["id", "date", "amount", "customerName", "packageName"]
+    },
+    "SystemNotification": {
+      "title": "System Notification",
+      "description": "Real-time activity notifications for administrator",
+      "properties": {
+        "id": { "type": "string", "description": "Notification ID" },
+        "title": { "type": "string", "description": "Title" },
+        "message": { "type": "string", "description": "Message" },
+        "time": { "type": "string", "description": "Display time" },
+        "type": { "type": "string", "description": "order | system | payment" },
+        "read": { "type": "boolean", "description": "Read status" },
+        "createdAt": { "type": "string", "description": "Timestamp ISO string" }
+      },
+      "required": ["id", "title", "message", "type", "read"]
+    },
+    "AdminUser": {
+      "title": "Admin User Account",
+      "description": "Stores administrator login credentials and role profiles in Firestore",
+      "properties": {
+        "id": { "type": "string", "description": "Admin ID / Username" },
+        "username": { "type": "string", "description": "Unique username" },
+        "password": { "type": "string", "description": "Hashed or secured password" },
+        "fullname": { "type": "string", "description": "Display full name" },
+        "role": { "type": "string", "description": "Admin role (Super Admin, Finance Billing, Network Engineer)" },
+        "createdAt": { "type": "string", "description": "Creation timestamp ISO" },
+        "lastLogin": { "type": "string", "description": "Last successful login timestamp ISO" }
+      },
+      "required": ["id", "username", "password", "fullname", "role"]
+    }
+  },
+  "firestoreRules": "rules_version = '2';\nservice cloud.firestore {\n  match /databases/{database}/documents {\n    match /{document=**} {\n      allow read, write: if true;\n    }\n  }\n}"
+}
